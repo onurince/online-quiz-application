@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">Create New Quiz</h3>
+            </div>
+            <div class="panel-body">
+                <form role="form" name="quizForm"  novalidate>
+                    <div class="form-group" ng-class="{ 'has-error' : quizForm.quizName.$invalid && !quizForm.quizName.$pristine }">
+                        <label>Quiz Name</label>
+                        <input type="text" class="form-control" name="quizName" ng-model="$ctrl.quizName" placeholder="Quiz Name" required="">
+                        <p ng-show="quizForm.quizName.$invalid && !quizForm.quizName.$pristine" class="help-block">Quiz name is required.</p>
+                    </div>
+                    <div class="question-border" ng-repeat="question in $ctrl.questions">
+                        <div class="form-group" ng-class="{ 'has-error' : quizForm['question_{{$index}}'].$invalid && !quizForm['question_{{$index}}'].$pristine }">
+                            <label>Question {{$index + 1}}</label>
+                            <div class="pull-right">
+                                <button type="button" class="close" aria-label="Close" title="Remove Question" ng-click="$ctrl.removeQuestion($index)">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <input type="text" class="form-control" name="question_{{$index}}" ng-model="question.text" placeholder="Enter Question" required="">
+                            <p ng-show="quizForm['question_{{$index}}'].$invalid && !quizForm['question_{{$index}}'].$pristine" class="help-block">Question is required.</p>
+
+                        </div>
+                        <div class="form-group" >
+                            <p>
+                                <label>Answers </label>
+                                <span class="text-muted">( Select more than one correct answers for multiple answers ) </span>
+                            </p>
+                            <p class="text-danger" ng-show="!question.isValid" class="help-block">Please select at least one correct answer.</p>
+
+                            <!-- input-group -->
+                            <div ng-repeat="answer in question.answers">
+                                <div class="input-group" ng-class="{ 'has-error' : quizForm['answer_{{$parent.$index}}_{{$index}}'].$invalid && !quizForm['answer_{{$parent.$index}}_{{$index}}'].$pristine }">
+                                    <input type="text" class="form-control" name="answer_{{$parent.$index}}_{{$index}}" ng-model="answer.text" placeholder="Answer {{$index + 1}}" required="">
+                                    <span class="input-group-addon checkbox">
+                                        <label style="min-height: initial;">
+                                            <input type="checkbox" ng-model="answer.correct" aria-label="" ng-change="$ctrl.checkboxCheckChanged(question)" ng-required="!question.isValid"> Correct
+                                        </label>
+                                    </span>
+
+                                </div><!-- /input-group -->
+                                <p ng-show="quizForm['answer_{{$parent.$index}}_{{$index}}'].$invalid && !quizForm['answer_{{$parent.$index}}_{{$index}}'].$pristine" class="help-block">Answer is required.</p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <button  class="btn btn-sm btn-primary" ng-disabled="quizForm.$invalid" ng-click="$ctrl.saveQuiz()">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Save
+                    </button>
+                    <a  class="btn btn-sm btn-default" ng-click="$ctrl.addQuestion()">
+                        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Add Question
+                    </a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

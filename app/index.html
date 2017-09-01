@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="webQuizApp">
+    <head>
+        <meta charset="utf-8">
+        <title>Online Quiz App</title>
+        <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+        <link rel="stylesheet" href="app.css">
+    </head>
+    <body>
+        <!-- Navbar -->
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                            aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Web Quiz App</a>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li id="menu_teacher"><a href="#!/teacher">Teacher</a></li>
+                        <li id="menu_student"><a href="#!/student">Student</a></li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        </nav>
+        <!-- Navbar -->
+        <div class="container">
+            <div ng-view></div>
+        </div>
+
+        <script src="bower_components/angular/angular.js"></script>
+        <script src="bower_components/angular-route/angular-route.js"></script>
+        <script src="app.module.js"></script>
+        <script src="app.config.js"></script>
+        <script src="core/core.module.js"></script>
+        <script src="core/storage/storage.module.js"></script>
+        <script src="core/storage/storage.service.js"></script>
+        <script src="core/uuid-generator/uuid-generator.module.js"></script>
+        <script src="core/uuid-generator/uuid-generator.service.js"></script>
+        <script src="core/quiz/quiz.module.js"></script>
+        <script src="core/quiz/quiz.service.js"></script>
+        <script src="teacher/teacher.module.js"></script>
+        <script src="teacher/teacher.component.js"></script>
+        <script src="student/student.module.js"></script>
+        <script src="student/student.component.js"></script>
+        <script src="create-quiz/create-quiz.module.js"></script>
+        <script src="create-quiz/create-quiz.component.js"></script>
+        <script src="take-quiz/take-quiz.module.js"></script>
+        <script src="take-quiz/take-quiz.component.js"></script>
+    </body>
+</html>

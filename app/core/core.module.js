@@ -1,0 +1,1 @@
+angular.module('core', ['core.quiz', 'core.storage', 'core.uuidGenerator']);

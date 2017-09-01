@@ -1,0 +1,62 @@
+<div class="row" ng-show="$ctrl.score !== false">
+    <div class="col-md-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{$ctrl.quiz.name}}</h3>
+            </div>
+            <div class="panel-body">
+                <div class="alert alert-success" role="alert">
+                    <strong>You have completed the quiz!</strong>
+                    Your score is <strong>{{$ctrl.score}}</strong>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <a  class="btn btn-sm btn-primary" href="#!/student">
+                    <span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span> Back
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row" ng-show="$ctrl.score === false">
+    <div class="col-md-12">
+        <form name="quizForm"  novalidate>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">{{$ctrl.quiz.name}}</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="panel panel-default" ng-repeat="question in $ctrl.quiz.questions">
+                        <div class="panel-heading">
+                            {{question.text}} <span ng-if="question.isMultiple == true" class="text-muted">
+                        (You can select multiple answers)</span>
+                        </div>
+                        <div class="panel-body">
+                            <div class="radio" ng-if="question.isMultiple == false" ng-repeat="answer in question.answers">
+                                <label>
+                                    <input type="radio" value="{{answer.text}}"
+                                           ng-model="question.givenAnswer" required=""> {{answer.text}}
+                                </label>
+                            </div>
+                            <div class="checkbox" ng-if="question.isMultiple == true" ng-repeat="answer in question.answers">
+                                <label>
+                                    <input type="checkbox" value="{{answer.text}}"
+                                           value="{{answer.text}}"
+                                           ng-change="$ctrl.checkboxCheckChanged(question)"
+                                           ng-required="!question.isValidforSubmit"
+                                           ng-model="question.givenAnswer[answer.text]" required=""> {{answer.text}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-footer">
+                    <button  class="btn btn-sm btn-primary" ng-click="$ctrl.submitQuiz()" ng-disabled="quizForm.$invalid">
+                        <span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span> Submit
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
